@@ -6,6 +6,7 @@ var BALLOONS = 3;
 var ALPHABET = 4;
 var NUMBERS = 5;
 var COLOURS = 6;
+var touch = [];
 
 var playIcon, playImg;
 var settingsIcon, settingsImg;
@@ -24,7 +25,7 @@ var colour_coverImg, colour_cover;
 var backIcon, backImg, backImg1, backImg2;
 var bgImg, levelsBg;
 
-var clickSound, backgroundSound;
+var clickSound, backgroundSound, popSound;
 
 var how_to_play, how_to_playImg;
 var settingsPage, settingsPg;
@@ -79,8 +80,11 @@ function preload(){
     bgImg = loadImage("images/background.jpg");
     levelsBg = loadImage("images/levelsBg.jpg");
 
+    //loading sounds
     clickSound = loadSound("sounds/click.mp3");
     backgroundSound = loadSound("sounds/backgroundMusic.mp3");
+    popSound = loadSound("sounds/pop.mp3");
+    dingSound = loadSound("sounds/ding.mp3");
 
     //images for how to play & settings button
     how_to_playImg = loadImage("images/how_to_playImg.png");
@@ -166,105 +170,101 @@ function preload(){
 
 
 function setup(){
-    createCanvas(640, 360);
-
+    createCanvas(displayWidth, displayHeight);
+    //640, 360
 
     //creating play icon
-    playIcon = createSprite(320, 280, 30, 5);
+    playIcon = createSprite(displayWidth/2, displayHeight/2 + 180, 30, 5);
     playIcon.addImage(playImg);
-    playIcon.scale = 0.6;
+    playIcon.scale = 1;
 
     //creating music on icon
-    music = createSprite(20, 340, 40, 10);
+    music = createSprite(0 + 40, displayHeight - 40, 40, 10);
     music.addImage("on", music_on);
     music.addImage("off", music_off);
     music.scale = 0.5;
 
-
     //creating how to play icon
-    howToPlayIcon = createSprite(600, 300, 40, 10);
+    howToPlayIcon = createSprite(displayWidth - 55, displayHeight - 120, 40, 10);
     howToPlayIcon.addImage(howToPlayImg);
-    howToPlayIcon.scale = 0.08;
+    howToPlayIcon.scale = 0.14;
+
+    //creating the game rules
+    how_to_play = createSprite(displayWidth/2, displayHeight/2, 40, 10);
+    how_to_play.addImage(how_to_playImg);
+    how_to_play.scale = 0.2;
+    how_to_play.visible = false;
+
+    //creating close icon
+    closeIcon = createSprite(displayWidth/2 + 112.5, displayHeight/2 - 160, 40, 10);
+    closeIcon.addImage(closeImg);
+    closeIcon.scale = 0.06;
+    closeIcon.visible = false;
 
     //creating music off icon
-    titleIcon = createSprite(320, 180, 40, 10);
+    titleIcon = createSprite(displayWidth/2 + 10, displayHeight/2, 40, 10);
     titleIcon.addImage(titleImg);
-    titleIcon.scale = 0.6;
+    titleIcon.scale = 1;
     
     //creating back icon
-    backIcon = createSprite(20, 20, 40, 10);
+    backIcon = createSprite(0 + 30, 0 + 30, 40, 10);
     backIcon.addImage(backImg);
-    backIcon.scale = 0.13;
+    backIcon.scale = 0.2;
     backIcon.visible = false;
 
     //creating back icon 1
-    backIcon1 = createSprite(15, 15, 40, 10);
+    backIcon1 = createSprite(0 + 25, 0 + 25, 40, 10);
     backIcon1.addImage(backImg1);
     backIcon1.scale = 0.08;
     backIcon1.visible = false;
 
     //creating back icon 2
-    backIcon2 = createSprite(15, 15, 40, 10);
+    backIcon2 = createSprite(0 + 25, 0 + 25, 40, 10);
     backIcon2.addImage(backImg2);
     backIcon2.scale = 0.08;
     backIcon2.visible = false;
 
     //creating back icon 3
-    backIcon3 = createSprite(15, 15, 40, 10);
+    backIcon3 = createSprite(0 + 25, 0 + 25, 40, 10);
     backIcon3.addImage(backImg3);
     backIcon3.scale = 0.08;
     backIcon3.visible = false;
 
     //creating back icon 4
-    backIcon4 = createSprite(15, 15, 40, 10);
+    backIcon4 = createSprite(0 + 25, 0 + 25, 40, 10);
     backIcon4.addImage(backImg4);
     backIcon4.scale = 0.08;
     backIcon4.visible = false;
 
     //creating the normal balloon cover
-    balloons_cover = createSprite(90, 130, 40, 10);
+    balloons_cover = createSprite(displayWidth/2 - 450, displayHeight/2 - 80, 40, 10);
     balloons_cover.addImage(balloons_coverImg);
-    balloons_cover.scale = 0.12;
+    balloons_cover.scale = 0.2;
     balloons_cover.visible = false;
    
     //creating the alphabet balloon cover
-    alphabet_cover = createSprite(240, 230, 40, 10);
+    alphabet_cover = createSprite(displayWidth/2 - 170, displayHeight/2 + 80, 40, 10);
     alphabet_cover.addImage(alphabet_coverImg);
-    alphabet_cover.scale = 0.13;
+    alphabet_cover.scale = 0.2;
     alphabet_cover.visible = false;
 
     //creating the number balloon cover
-    number_cover = createSprite(390, 140, 40, 10);
+    number_cover = createSprite(displayWidth/2 + 120, displayHeight/2 - 80, 40, 10);
     number_cover.addImage(number_coverImg);
-    number_cover.scale = 0.15;
+    number_cover.scale = 0.2;
     number_cover.visible = false;
 
     //creating the colour balloon cover
-    colour_cover = createSprite(550, 230, 40, 10);
+    colour_cover = createSprite(displayWidth/2 + 420, displayHeight/2 + 70, 40, 10);
     colour_cover.addImage(colour_coverImg);
-    colour_cover.scale = 0.12;
+    colour_cover.scale = 0.2;
     colour_cover.visible = false;
 
-    //creating the game rules
-    how_to_play = createSprite(315, 185, 40, 10);
-    how_to_play.addImage(how_to_playImg);
-    how_to_play.scale = 0.16;
-    how_to_play.visible = false;
-
-    //creating close icon
-    closeIcon = createSprite(428, 25, 40, 10);
-    closeIcon.addImage(closeImg);
-    closeIcon.scale = 0.06;
-    closeIcon.visible = false;
-
-    //creating close icon 1
-    closeIcon1 = createSprite(407, 133, 40, 10);
-    closeIcon1.addImage(closeImg);
-    closeIcon1.scale = 0.06;
-    closeIcon1.visible = false;
-
     //create Obstacle and Cloud Groups
-    cloudsGroup = new Group();
+    cloudGroup = new Group();
+    cloudGroup1 = new Group();
+    cloudGroup2 = new Group();
+    cloudGroup3 = new Group();
     balloonsGroup = new Group();
     balloonsGroup1 = new Group();
     balloonsAlphabetGroup = new Group();
@@ -283,10 +283,20 @@ function setup(){
 
 function draw(){
 
+    if(playIcon.touchCount > 0){
+        for(var s = 0; s < playIcon.touchCount; s++){
+            console.log("Works")
+            touch = playIcon.GetTouch(s)
+        }
+    }
+
     if(gameState === COLOURS){        
         background(74, 189, 234);    
         backIcon4.visible = true;
-        spawnClouds();
+        clouds();
+        clouds1();
+        clouds2();
+        clouds3();
         spawnBalloons1();
         spawnColourBalloons();
         sunBalloon();
@@ -298,7 +308,10 @@ function draw(){
     if(gameState === NUMBERS){        
         background(74, 189, 234);    
         backIcon3.visible = true;
-        spawnClouds();
+        clouds();
+        clouds1();
+        clouds2();
+        clouds3();
         spawnBalloons1();
         spawnNumberBalloons();
         sunBalloon();
@@ -310,24 +323,92 @@ function draw(){
     if(gameState === ALPHABET){        
         background(74, 189, 234);    
         backIcon2.visible = true;
-        spawnClouds();
+        clouds();
+        clouds1();
+        clouds2();
+        clouds3();
         spawnBalloons1();
         spawnAlphabetBalloons();
         sunBalloon();
         spiralBalloon();
         pointBalloon();
         starBalloon();
+        for(var i = 0; i < balloonsGroup1.length; i++){
+            if(mousePressedOver(balloonsGroup1[i])){
+                balloonsGroup1[i].destroy();
+                popSound.play();
+            }
+        }
+
+        for(var i = 0; i < balloonsAlphabetGroup.length; i++){
+            if(mousePressedOver(balloonsAlphabetGroup[i])){
+                balloonsAlphabetGroup[i].destroy();
+                popSound.play();
+            }
+        }
+
+        for(var j = 0; j < sunBalloonGroup.length; j++){
+            if(mousePressedOver(sunBalloonGroup[j])){
+                sunBalloonGroup[j].destroy();
+            }
+        }
+        for(var k = 0; k < spiralBalloonGroup.length; k++){
+            if(mousePressedOver(spiralBalloonGroup[k])){
+                spiralBalloonGroup[k].destroy();
+            }
+        }
+        for(var m = 0; m < starBalloonGroup.length; m++){
+            if(mousePressedOver(starBalloonGroup[m])){
+                starBalloonGroup[m].destroy();
+            }
+        }
+        for(var n = 0; n < pointBalloonGroup.length; n++){
+            if(mousePressedOver(pointBalloonGroup[n])){
+                pointBalloonGroup[n].destroy();
+                dingSound.play();
+            }
+        }
     }
 
     if(gameState === BALLOONS){        
         background(74, 189, 234);    
         backIcon1.visible = true;
-        spawnClouds();
+        clouds();
+        clouds1();
+        clouds2();
+        clouds3();
         spawnBalloons();
         sunBalloon();
         spiralBalloon();
         pointBalloon();
         starBalloon();
+        for(var i = 0; i < balloonsGroup.length; i++){
+            if(mousePressedOver(balloonsGroup[i])){
+                balloonsGroup[i].destroy();
+                popSound.play();
+            }
+        }
+        for(var j = 0; j < sunBalloonGroup.length; j++){
+            if(mousePressedOver(sunBalloonGroup[j])){
+                sunBalloonGroup[j].destroy();
+            }
+        }
+        for(var k = 0; k < spiralBalloonGroup.length; k++){
+            if(mousePressedOver(spiralBalloonGroup[k])){
+                spiralBalloonGroup[k].destroy();
+            }
+        }
+        for(var m = 0; m < starBalloonGroup.length; m++){
+            if(mousePressedOver(starBalloonGroup[m])){
+                starBalloonGroup[m].destroy();
+            }
+        }
+        for(var n = 0; n < pointBalloonGroup.length; n++){
+            if(mousePressedOver(pointBalloonGroup[n])){
+                pointBalloonGroup[n].destroy();
+                dingSound.play();
+            }
+        }
     }
  
 
@@ -356,58 +437,58 @@ function draw(){
 
    //if mouse is over play icon
     if(mouseIsOver(playIcon)){
-        playIcon.scale = 0.63;
+        playIcon.scale = 1.03;
     } else{
-        playIcon.scale = 0.6;
+        playIcon.scale = 1;
     }
 
     //if mouse is over rules icon
     if(mouseIsOver(howToPlayIcon)){
-        howToPlayIcon.scale = 0.083;
+        howToPlayIcon.scale = 0.143;
     } else{
-        howToPlayIcon.scale = 0.08;
+        howToPlayIcon.scale = 0.14;
     }
 
     //if mouse is over music on icon
     if(mouseIsOver(music)){
-        music.scale = 0.43;
+        music.scale = 0.73;
     } else{
-        music.scale = 0.4;
+        music.scale = 0.7;
     }
 
     //if mouse is over back icon
     if(mouseIsOver(backIcon)){
-        backIcon.scale = 0.15;
+        backIcon.scale = 0.23;
     } else{
-        backIcon.scale = 0.13;
+        backIcon.scale = 0.2;
     }
 
     //if mouse is over back icon 1
     if(mouseIsOver(backIcon1)){
-        backIcon1.scale = 0.085;
+        backIcon1.scale = 0.185;
     } else{
-        backIcon1.scale = 0.08;
+        backIcon1.scale = 0.175;
     }
 
     //if mouse is over back icon 2
     if(mouseIsOver(backIcon2)){
-        backIcon2.scale = 0.085;
+        backIcon2.scale = 0.185;
     } else{
-        backIcon2.scale = 0.08;
+        backIcon2.scale = 0.175;
     }
 
     //if mouse is over back icon 3
     if(mouseIsOver(backIcon3)){
-        backIcon3.scale = 0.085;
+        backIcon3.scale = 0.185;
     } else{
-        backIcon3.scale = 0.08;
+        backIcon3.scale = 0.175;
     }
 
     //if mouse is over back icon 4
     if(mouseIsOver(backIcon4)){
-        backIcon4.scale = 0.085;
+        backIcon4.scale = 0.185;
     } else{
-        backIcon4.scale = 0.08;
+        backIcon4.scale = 0.175;
     }
 
     //if mouse is over close icon
@@ -419,30 +500,30 @@ function draw(){
 
     //if mouse is over balloon cover
     if(mouseIsOver(balloons_cover)){
-        balloons_cover.scale = 0.125;
+        balloons_cover.scale = 0.228;
     } else{
-        balloons_cover.scale = 0.12;
+        balloons_cover.scale = 0.22;
     }
 
     //if mouse is over alphabet cover
     if(mouseIsOver(alphabet_cover)){
-        alphabet_cover.scale = 0.135;
+        alphabet_cover.scale = 0.238;
     } else{
-        alphabet_cover.scale = 0.13;
+        alphabet_cover.scale = 0.23;
     }
 
     //if mouse is over number cover
     if(mouseIsOver(number_cover)){
-        number_cover.scale = 0.155;
+        number_cover.scale = 0.258;
     } else{
-        number_cover.scale = 0.15;
+        number_cover.scale = 0.25;
     }
 
     //if mouse is over colour cover
     if(mouseIsOver(colour_cover)){
-        colour_cover.scale = 0.125;
+        colour_cover.scale = 0.238;
     } else{
-        colour_cover.scale = 0.12;
+        colour_cover.scale = 0.23;
     }
 
 
@@ -515,7 +596,10 @@ function draw(){
         gameState = START;
         backIcon1.visible = false;
         balloonsGroup.destroyEach();
-        cloudsGroup.destroyEach();
+        cloudGroup.destroyEach();
+        cloudGroup1.destroyEach();
+        cloudGroup2.destroyEach();
+        cloudGroup3.destroyEach();
         sunBalloonGroup.destroyEach();
         spiralBalloonGroup.destroyEach();
         pointBalloonGroup.destroyEach();
@@ -537,7 +621,10 @@ function draw(){
         gameState = START;
         backIcon2.visible = false;
         balloonsGroup1.destroyEach();
-        cloudsGroup.destroyEach();
+        cloudGroup.destroyEach();
+        cloudGroup1.destroyEach();
+        cloudGroup2.destroyEach();
+        cloudGroup3.destroyEach();
         sunBalloonGroup.destroyEach();
         spiralBalloonGroup.destroyEach();
         pointBalloonGroup.destroyEach();
@@ -559,7 +646,10 @@ function draw(){
         gameState = START;
         backIcon3.visible = false;
         balloonsGroup1.destroyEach();
-        cloudsGroup.destroyEach();
+        cloudGroup.destroyEach();
+        cloudGroup1.destroyEach();
+        cloudGroup2.destroyEach();
+        cloudGroup3.destroyEach();
         sunBalloonGroup.destroyEach();
         spiralBalloonGroup.destroyEach();
         pointBalloonGroup.destroyEach();
@@ -581,7 +671,10 @@ function draw(){
         gameState = START;
         backIcon4. visible = false;
         balloonsGroup1.destroyEach();
-        cloudsGroup.destroyEach();
+        cloudGroup.destroyEach();
+        cloudGroup1.destroyEach();
+        cloudGroup2.destroyEach();
+        cloudGroup3.destroyEach();;
         sunBalloonGroup.destroyEach();
         spiralBalloonGroup.destroyEach();
         pointBalloonGroup.destroyEach();
@@ -594,41 +687,75 @@ function draw(){
 }
 
 
+function clouds(){
+    if(frameCount % 250 === 0){
+        var cloud = createSprite(displayWidth + 70, 50, 40, 10);
+        cloud.addImage(cloudImage);
+        cloud.y = Math.round(random(0 + 30, displayHeight/2 + 30));
+        cloud.velocityX = -1.4;
 
-function spawnClouds(){
-        if(frameCount % 110 === 0){
-                var cloud = createSprite(700, 50, 40, 10);
-                cloud.y = Math.round(random(30, 180));
-                cloud.velocityX = -1;
-                
+        //assigning scale & lifetime to clouds
+        cloud.scale = 0.95;
+        cloud.lifetime = 1000;
 
-                var rand = Math.round(random(1, 4));
-                switch(rand){
-                    case 1: cloud.addImage(cloudImage);
-                        break;
-                    case 2: cloud.addImage(cloudImage1);
-                        break;
-                    case 3: cloud.addImage(cloudImage2);
-                        break;
-                    case 4: cloud.addImage(cloudImage3);
-                        break;
-                    default: break;         
-                }
+        //add clouds to group
+        cloudGroup.add(cloud);
+}
+}
 
-                //assigning scale & lifetime to clouds
-                cloud.scale = 0.6;
-                cloud.lifetime = 790;
+function clouds1(){
+    if(frameCount % 250 === 0){
+        var cloud1 = createSprite(displayWidth + 220, 50, 40, 10);
+        cloud1.addImage(cloudImage1);
+        cloud1.y = Math.round(random(0 + 30, displayHeight/2 + 30));
+        cloud1.velocityX = -1.4;
 
-                //add clouds to group
-                cloudsGroup.add(cloud);
-        }
+        //assigning scale & lifetime to clouds
+        cloud1.scale = 1.1;
+        cloud1.lifetime = 1000;
+
+        //add clouds to group
+        cloudGroup1.add(cloud1);
+}
+}
+
+function clouds2(){
+    if(frameCount % 250 === 0){
+        var cloud2 = createSprite(displayWidth + 380, 50, 40, 10);
+        cloud2.addImage(cloudImage2);
+        cloud2.y = Math.round(random(0 + 30, displayHeight/2 + 30));
+        cloud2.velocityX = -1.4;
+
+        //assigning scale & lifetime to clouds
+        cloud2.scale = 1.25;
+        cloud2.lifetime = 1000;
+
+        //add clouds to group
+        cloudGroup2.add(cloud2);
+}
+}
+
+function clouds3(){
+    if(frameCount % 250 === 0){
+        var cloud3 = createSprite(displayWidth + 530, 50, 40, 10);
+        cloud3.addImage(cloudImage3);
+        cloud3.y = Math.round(random(0 + 30, displayHeight/2 + 30));
+        cloud3.velocityX = -1.4;
+
+        //assigning scale & lifetime to clouds
+        cloud3.scale = 1.2;
+        cloud3.lifetime = 1000;
+
+        //add clouds to group
+        cloudGroup3.add(cloud3);
+}
 }
 
 function spawnBalloons(){
         if(frameCount % 75 === 0){
-                var balloon = createSprite(600, 400, 10, 30);
-                balloon.x = Math.round(random(60, 610));
-                balloon.velocityY = Math.round(random(-1, -1.5));
+                var balloon = createSprite(600, displayHeight + 70, 10, 30);
+                balloon.x = Math.round(random(0 + 60, displayWidth - 30));
+                balloon.velocityY = Math.round(random(-2, -2.2));
 
                 var rand = Math.round(random(1, 13));
                 switch(rand){
@@ -662,7 +789,7 @@ function spawnBalloons(){
                 }
 
                 //assigning scale & lifetime
-                balloon.scale = 0.55;
+                balloon.scale = 1.2;
                 balloon.lifetime = 450;
 
                 //add balloons to group
@@ -672,9 +799,9 @@ function spawnBalloons(){
 
 function spawnBalloons1(){
         if(frameCount % 150 === 0){
-                var balloon1 = createSprite(600, 400, 10, 30);
-                balloon1.x = Math.round(random(60, 610));
-                balloon1.velocityY = Math.round(random(-1, -1.5));
+                var balloon1 = createSprite(600, displayHeight + 50, 10, 30);
+                balloon1.x = Math.round(random(0 + 60, displayWidth - 30));
+                balloon1.velocityY = Math.round(random(-1.5, -1.8));
 
                 var rand = Math.round(random(1, 13));
                 switch(rand){
@@ -708,7 +835,7 @@ function spawnBalloons1(){
                 }
 
                 //assigning scale & lifetime
-                balloon1.scale = 0.55;
+                balloon1.scale = 1.2;
                 balloon1.lifetime = 450;
 
                 //add balloons to group
@@ -717,10 +844,10 @@ function spawnBalloons1(){
 }
 
 function spawnAlphabetBalloons(){
-        if(frameCount % 100 === 0){
-                var balloonA = createSprite(600, 400, 10, 30);
-                balloonA.x = Math.round(random(60, 610));
-                balloonA.velocityY = Math.round(random(-1, -1.5));
+        if(frameCount % 120 === 0){
+                var balloonA = createSprite(600, displayHeight + 70, 10, 30);
+                balloonA.x = Math.round(random(0 + 60, displayWidth - 60));
+                balloonA.velocityY = Math.round(random(-1.8, -2));
 
                 var rand = Math.round(random(1, 26));
                 switch(rand){
@@ -780,7 +907,7 @@ function spawnAlphabetBalloons(){
                 }
 
                 //assigning scale & lifetime
-                balloonA.scale = 0.65;
+                balloonA.scale = 1.35;
                 balloonA.lifetime = 450;
 
                 //add balloons to group
@@ -790,9 +917,9 @@ function spawnAlphabetBalloons(){
 
 function spawnNumberBalloons(){
         if(frameCount % 100 === 0){
-                var balloonN = createSprite(600, 400, 10, 30);
-                balloonN.x = Math.round(random(60, 610));
-                balloonN.velocityY = Math.round(random(-1, -1.5));
+                var balloonN = createSprite(600, displayHeight + 50, 10, 30);
+                balloonN.x = Math.round(random(0 + 60, displayWidth - 30));
+                balloonN.velocityY = Math.round(random(-1.5, -1.8));
 
                 var rand = Math.round(random(1, 10));
                 switch(rand){
@@ -830,9 +957,9 @@ function spawnNumberBalloons(){
 
 function spawnColourBalloons(){
         if(frameCount % 100 === 0){
-                var balloonC = createSprite(600, 400, 10, 30);
-                balloonC.x = Math.round(random(60, 610));
-                balloonC.velocityY = Math.round(random(-1, -1.5));
+                var balloonC = createSprite(600, displayHeight + 50, 10, 30);
+                balloonC.x = Math.round(random(0 + 60, displayWidth - 30));
+                balloonC.velocityY = Math.round(random(-1.5, -1.8));
 
                 var rand = Math.round(random(1, 7));
                 switch(rand){
@@ -863,12 +990,12 @@ function spawnColourBalloons(){
 }
 
 function sunBalloon(){
-        if(frameCount % 380 === 0){
-                var sunBalloon = createSprite(600, 430, 10, 30);
+        if(frameCount % 250 === 0){
+                var sunBalloon = createSprite(600, displayHeight + 70, 10, 30);
                 sunBalloon.velocityY = -1.4;
-                sunBalloon.x = Math.round(random(60, 610));
+                sunBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
                 sunBalloon.addImage(sunB);
-                sunBalloon.scale = 1.15;
+                sunBalloon.scale = 2.5;
 
                 //assigning lifetime
                 sunBalloon.lifetime = 450;
@@ -879,12 +1006,12 @@ function sunBalloon(){
 }
 
 function spiralBalloon(){
-        if(frameCount % 380 === 0){
-                var spiralBalloon = createSprite(600, 580, 10, 30);
+        if(frameCount % 250 === 0){
+                var spiralBalloon = createSprite(600, displayHeight + 270, 10, 30);
                 spiralBalloon.velocityY = -1.4;
-                spiralBalloon.x = Math.round(random(60, 610));
+                spiralBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
                 spiralBalloon.addImage(spiralB);
-                spiralBalloon.scale = 1.15;
+                spiralBalloon.scale = 2.5;
 
                 //assigning lifetime
                 spiralBalloon.lifetime = 520;
@@ -895,12 +1022,12 @@ function spiralBalloon(){
 }
 
 function pointBalloon(){
-        if(frameCount % 380 === 0){
-                var pointBalloon = createSprite(600, 730, 10, 30);
+        if(frameCount % 250 === 0){
+                var pointBalloon = createSprite(600, displayHeight + 470, 10, 30);
                 pointBalloon.velocityY = -1.4;
-                pointBalloon.x = Math.round(random(60, 610));
+                pointBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
                 pointBalloon.addImage(pointB);
-                pointBalloon.scale = 1.15;
+                pointBalloon.scale = 2.5;
 
                 //assigning lifetime
                 pointBalloon.lifetime = 600;
@@ -911,12 +1038,12 @@ function pointBalloon(){
 }
 
 function starBalloon(){
-        if(frameCount % 380 === 0){
-                var starBalloon = createSprite(600, 880, 10, 30);
+        if(frameCount % 250 === 0){
+                var starBalloon = createSprite(600, displayHeight + 560, 10, 30);
                 starBalloon.velocityY = -1.4;
-                starBalloon.x = Math.round(random(60, 610));
+                starBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
                 starBalloon.addImage(starB);
-                starBalloon.scale = 1.15;
+                starBalloon.scale = 2.5;
 
                 //assigning lifetime
                 starBalloon.lifetime = 820;
