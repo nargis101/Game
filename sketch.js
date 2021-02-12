@@ -8,6 +8,7 @@ var NUMBERS = 5;
 var COLOURS = 6;
 var touch = [];
 
+
 var playIcon, playImg;
 var settingsIcon, settingsImg;
 var music, music_on, music_off;
@@ -59,113 +60,146 @@ var pointB, sprialB, starB, sunB;
 
 
 function preload(){
-    playImg = loadImage("images/play.png");
-    settingsImg = loadImage("images/settings.png");
-    music_on = loadImage("images/music_on.png");
-    music_off = loadImage("images/music_off.png");
-    titleImg = loadImage("images/title.png");
-    backImg = loadImage("images/back.png");
-    backImg1 = loadImage("images/back.png");
-    backImg2 = loadImage("images/back.png");
-    backImg3 = loadImage("images/back.png");
-    backImg4 = loadImage("images/back.png");
-    howToPlayImg = loadImage("images/how to play.png");
-    closeImg = loadImage("images/close.png");
+    playImg = loadImage("Folder/images/play.png");
+    settingsImg = loadImage("Folder/images/settings.png");
+    music_on = loadImage("Folder/images/music_on.png");
+    music_off = loadImage("Folder/images/music_off.png");
+    titleImg = loadImage("Folder/images/title.png");
+    backImg = loadImage("Folder/images/back.png");
+    backImg1 = loadImage("Folder/images/back.png");
+    backImg2 = loadImage("Folder/images/back.png");
+    backImg3 = loadImage("Folder/images/back.png");
+    backImg4 = loadImage("Folder/images/back.png");
+    howToPlayImg = loadImage("Folder/images/how to play.png");
+    closeImg = loadImage("Folder/images/close.png");
 
-    balloons_coverImg = loadImage("balloons/balloons_cover.png");
-    alphabet_coverImg = loadImage("alphabet balloons/alphabet_cover.png");
-    number_coverImg = loadImage("number balloons/numbers_cover.png");
-    colour_coverImg = loadImage("coloured balloons/colours_cover.png");
+    balloons_coverImg = loadImage("Folder/balloons/balloons_cover.png");
+    alphabet_coverImg = loadImage("Folder/alphabet balloons/alphabet_cover.png");
+    number_coverImg = loadImage("Folder/number balloons/numbers_cover.png");
+    colour_coverImg = loadImage("Folder/coloured balloons/colours_cover.png");
 
-    bgImg = loadImage("images/background.jpg");
-    levelsBg = loadImage("images/levelsBg.jpg");
+    bgImg = loadImage("Folder/images/background.jpg");
+    levelsBg = loadImage("Folder/images/levelsBg.jpg");
 
     //loading sounds
-    clickSound = loadSound("sounds/click.mp3");
-    backgroundSound = loadSound("sounds/backgroundMusic.mp3");
-    popSound = loadSound("sounds/pop.mp3");
-    dingSound = loadSound("sounds/ding.mp3");
+    clickSound = loadSound("Folder/sounds/click.mp3");
+    backgroundSound = loadSound("Folder/sounds/backgroundMusic.mp3");
+    popSound = loadSound("Folder/sounds/pop.mp3");
+    dingSound = loadSound("Folder/sounds/ding.mp3");
+
+    soundA = loadSound("Folder/sounds/aSound.mp3");
+    soundB = loadSound("Folder/sounds/bSound.mp3");
+    soundC = loadSound("Folder/sounds/cSound.mp3");
+    soundD = loadSound("Folder/sounds/dSound.mp3");
+    soundE = loadSound("Folder/sounds/eSound.mp3");
+    soundF = loadSound("Folder/sounds/fSound.mp3");
+    soundG = loadSound("Folder/sounds/gSound.mp3");
+    soundH = loadSound("Folder/sounds/hSound.mp3");
+    soundI = loadSound("Folder/sounds/iSound.mp3");
+    soundJ = loadSound("Folder/sounds/jSound.mp3");
+    soundK = loadSound("Folder/sounds/kSound.mp3");
+    soundL = loadSound("Folder/sounds/lSound.mp3");
+    soundM = loadSound("Folder/sounds/mSound.mp3");
+    soundN = loadSound("Folder/sounds/nSound.mp3");
+    soundO = loadSound("Folder/sounds/oSound.mp3");
+    soundP = loadSound("Folder/sounds/pSound.mp3");
+    soundQ = loadSound("Folder/sounds/qSound.mp3");
+    soundR = loadSound("Folder/sounds/rSound.mp3");
+    soundS = loadSound("Folder/sounds/sSound.mp3");
+    soundT = loadSound("Folder/sounds/tSound.mp3");
+    soundU = loadSound("Folder/sounds/uSound.mp3");
+    soundV = loadSound("Folder/sounds/vSound.mp3");
+    soundW = loadSound("Folder/sounds/wSound.mp3");
+    soundX = loadSound("Folder/sounds/xSound.mp3");
+    soundY = loadSound("Folder/sounds/ySound.mp3");
+    soundZ = loadSound("Folder/sounds/zSound.mp3");
+
+
+
+    soundA = loadSound("Folder/sounds/aSound.mp3");
+
+    soundA = loadSound("Folder/sounds/aSound.mp3");
 
     //images for how to play & settings button
-    how_to_playImg = loadImage("images/how_to_playImg.png");
-    settingsPg = loadImage("images/settingsPage.png");
+    how_to_playImg = loadImage("Folder/images/how_to_playImg.png");
+    settingsPg = loadImage("Folder/images/settingsPage.png");
 
     //clouds in PLAY1
-    cloudImage = loadImage("PLAY1/cloud.png");
-    cloudImage1 = loadImage("PLAY1/cloud1.png");
-    cloudImage2 = loadImage("PLAY1/cloud2.png");
-    cloudImage3 = loadImage("PLAY1/cloud3.png");
+    cloudImage = loadImage("Folder/clouds/cloud.png");
+    cloudImage1 = loadImage("Folder/clouds/cloud1.png");
+    cloudImage2 = loadImage("Folder/clouds/cloud2.png");
+    cloudImage3 = loadImage("Folder/clouds/cloud3.png");
 
     //balloons in PLAY1
-    blueImg = loadImage("balloons/blue.png");
-    cyanImg = loadImage("balloons/cyan.png");
-    dark_blueImg = loadImage("balloons/dark blue.png");
-    dark_redImg = loadImage("balloons/dark red.png");
-    greenImg = loadImage("balloons/green.png");
-    heartImg = loadImage("balloons/heart.png");
-    orangeImg = loadImage("balloons/orange.png");
-    pinkImg = loadImage("balloons/pink.png");
-    purpleImg = loadImage("balloons/purple.png");
-    redImg = loadImage("balloons/red.png");
-    sky_blueImg = loadImage("balloons/sky blue.png");
-    turquoiseImg = loadImage("balloons/turquoise.png");
-    violetImg = loadImage("balloons/violet.png");
-    yellowImg = loadImage("balloons/yellow.png");
+    blueImg = loadImage("Folder/balloons/blue.png");
+    cyanImg = loadImage("Folder/balloons/cyan.png");
+    dark_blueImg = loadImage("Folder/balloons/dark blue.png");
+    dark_redImg = loadImage("Folder/balloons/dark red.png");
+    greenImg = loadImage("Folder/balloons/green.png");
+    heartImg = loadImage("Folder/balloons/heart.png");
+    orangeImg = loadImage("Folder/balloons/orange.png");
+    pinkImg = loadImage("Folder/balloons/pink.png");
+    purpleImg = loadImage("Folder/balloons/purple.png");
+    redImg = loadImage("Folder/balloons/red.png");
+    sky_blueImg = loadImage("Folder/balloons/sky blue.png");
+    turquoiseImg = loadImage("Folder/balloons/turquoise.png");
+    violetImg = loadImage("Folder/balloons/violet.png");
+    yellowImg = loadImage("Folder/balloons/yellow.png");
 
     //alphabet balloons in PLAY2
-    A = loadImage("alphabet balloons/A.png");
-    B = loadImage("alphabet balloons/B.png");
-    C = loadImage("alphabet balloons/C.png");
-    D = loadImage("alphabet balloons/D.png");
-    E = loadImage("alphabet balloons/E.png");
-    F = loadImage("alphabet balloons/F.png");
-    G = loadImage("alphabet balloons/G.png");
-    H = loadImage("alphabet balloons/H.png");
-    I = loadImage("alphabet balloons/I.png");
-    J = loadImage("alphabet balloons/J.png");
-    K = loadImage("alphabet balloons/K.png");
-    L = loadImage("alphabet balloons/L.png");
-    M = loadImage("alphabet balloons/M.png");
-    N = loadImage("alphabet balloons/N.png");
-    O = loadImage("alphabet balloons/O.png");
-    P = loadImage("alphabet balloons/P.png");
-    Q = loadImage("alphabet balloons/Q.png");
-    R = loadImage("alphabet balloons/R.png");
-    S = loadImage("alphabet balloons/S.png");
-    T = loadImage("alphabet balloons/T.png");
-    U = loadImage("alphabet balloons/U.png");
-    V = loadImage("alphabet balloons/V.png");
-    W = loadImage("alphabet balloons/W.png");
-    X = loadImage("alphabet balloons/X.png");
-    Y = loadImage("alphabet balloons/Y.png");
-    Z = loadImage("alphabet balloons/Z.png");
+    A = loadImage("Folder/alphabet balloons/A.png");
+    B = loadImage("Folder/alphabet balloons/B.png");
+    C = loadImage("Folder/alphabet balloons/C.png");
+    D = loadImage("Folder/alphabet balloons/D.png");
+    E = loadImage("Folder/alphabet balloons/E.png");
+    F = loadImage("Folder/alphabet balloons/F.png");
+    G = loadImage("Folder/alphabet balloons/G.png");
+    H = loadImage("Folder/alphabet balloons/H.png");
+    I = loadImage("Folder/alphabet balloons/I.png");
+    J = loadImage("Folder/alphabet balloons/J.png");
+    K = loadImage("Folder/alphabet balloons/K.png");
+    L = loadImage("Folder/alphabet balloons/L.png");
+    M = loadImage("Folder/alphabet balloons/M.png");
+    N = loadImage("Folder/alphabet balloons/N.png");
+    O = loadImage("Folder/alphabet balloons/O.png");
+    P = loadImage("Folder/alphabet balloons/P.png");
+    Q = loadImage("Folder/alphabet balloons/Q.png");
+    R = loadImage("Folder/alphabet balloons/R.png");
+    S = loadImage("Folder/alphabet balloons/S.png");
+    T = loadImage("Folder/alphabet balloons/T.png");
+    U = loadImage("Folder/alphabet balloons/U.png");
+    V = loadImage("Folder/alphabet balloons/V.png");
+    W = loadImage("Folder/alphabet balloons/W.png");
+    X = loadImage("Folder/alphabet balloons/X.png");
+    Y = loadImage("Folder/alphabet balloons/Y.png");
+    Z = loadImage("Folder/alphabet balloons/Z.png");
 
     //number balloons in PLAY3
-    balloon1 = loadImage("number balloons/1.png");
-    balloon2 = loadImage("number balloons/2.png");
-    balloon3 = loadImage("number balloons/3.png");
-    balloon4 = loadImage("number balloons/4.png");
-    balloon5 = loadImage("number balloons/5.png");
-    balloon6 = loadImage("number balloons/6.png");
-    balloon7 = loadImage("number balloons/7.png");
-    balloon8 = loadImage("number balloons/8.png");
-    balloon9 = loadImage("number balloons/9.png");
-    balloon10 = loadImage("number balloons/10.png");
+    balloon1 = loadImage("Folder/number balloons/1.png");
+    balloon2 = loadImage("Folder/number balloons/2.png");
+    balloon3 = loadImage("Folder/number balloons/3.png");
+    balloon4 = loadImage("Folder/number balloons/4.png");
+    balloon5 = loadImage("Folder/number balloons/5.png");
+    balloon6 = loadImage("Folder/number balloons/6.png");
+    balloon7 = loadImage("Folder/number balloons/7.png");
+    balloon8 = loadImage("Folder/number balloons/8.png");
+    balloon9 = loadImage("Folder/number balloons/9.png");
+    balloon10 = loadImage("Folder/number balloons/10.png");
 
     //colour balloons in PLAY4
-    blue = loadImage("coloured balloons/blue.png");
-    green = loadImage("coloured balloons/green.png");
-    orange = loadImage("coloured balloons/orange.png");
-    pink = loadImage("coloured balloons/pink.png");
-    purple = loadImage("coloured balloons/purple.png");
-    red = loadImage("coloured balloons/red.png");
-    yellow = loadImage("coloured balloons/yellow.png");
+    blue = loadImage("Folder/coloured balloons/blue.png");
+    green = loadImage("Folder/coloured balloons/green.png");
+    orange = loadImage("Folder/coloured balloons/orange.png");
+    pink = loadImage("Folder/coloured balloons/pink.png");
+    purple = loadImage("Folder/coloured balloons/purple.png");
+    red = loadImage("Folder/coloured balloons/red.png");
+    yellow = loadImage("Folder/coloured balloons/yellow.png");
 
     //special balloons
-    pointB = loadImage("number balloons/point.png");
-    spiralB = loadImage("number balloons/spiral.png");
-    starB = loadImage("number balloons/star.png");
-    sunB = loadImage("number balloons/sun.png");
+    pointB = loadImage("Folder/number balloons/point.png");
+    spiralB = loadImage("Folder/number balloons/spiral.png");
+    starB = loadImage("Folder/number balloons/star.png");
+    sunB = loadImage("Folder/number balloons/sun.png");
 }
 
 
@@ -182,30 +216,31 @@ function setup(){
     music = createSprite(0 + 40, displayHeight - 40, 40, 10);
     music.addImage("on", music_on);
     music.addImage("off", music_off);
-    music.scale = 0.5;
+    music.scale = 0.7;
 
     //creating how to play icon
     howToPlayIcon = createSprite(displayWidth - 55, displayHeight - 120, 40, 10);
     howToPlayIcon.addImage(howToPlayImg);
-    howToPlayIcon.scale = 0.14;
+    howToPlayIcon.scale = 0.13;
+
+    //creating title icon
+    titleIcon = createSprite(displayWidth/2 + 10, displayHeight/2, 40, 10);
+    titleIcon.addImage(titleImg);
+    titleIcon.scale = 1;
+
 
     //creating the game rules
     how_to_play = createSprite(displayWidth/2, displayHeight/2, 40, 10);
     how_to_play.addImage(how_to_playImg);
-    how_to_play.scale = 0.2;
+    how_to_play.scale = 0.3;
     how_to_play.visible = false;
 
     //creating close icon
-    closeIcon = createSprite(displayWidth/2 + 112.5, displayHeight/2 - 160, 40, 10);
+    closeIcon = createSprite(displayWidth/2 + 210, displayHeight/2 - 300, 40, 10);
     closeIcon.addImage(closeImg);
-    closeIcon.scale = 0.06;
+    closeIcon.scale = 1;
     closeIcon.visible = false;
 
-    //creating music off icon
-    titleIcon = createSprite(displayWidth/2 + 10, displayHeight/2, 40, 10);
-    titleIcon.addImage(titleImg);
-    titleIcon.scale = 1;
-    
     //creating back icon
     backIcon = createSprite(0 + 30, 0 + 30, 40, 10);
     backIcon.addImage(backImg);
@@ -283,88 +318,155 @@ function setup(){
 
 function draw(){
 
-    if(playIcon.touchCount > 0){
-        for(var s = 0; s < playIcon.touchCount; s++){
-            console.log("Works")
-            touch = playIcon.GetTouch(s)
-        }
-    }
 
     if(gameState === COLOURS){        
         background(74, 189, 234);    
         backIcon4.visible = true;
-        clouds();
-        clouds1();
-        clouds2();
-        clouds3();
-        spawnBalloons1();
-        spawnColourBalloons();
-        sunBalloon();
-        spiralBalloon();
-        pointBalloon();
-        starBalloon();
+        Clouds.clouds();
+        Clouds.clouds1();
+        Clouds.clouds2();
+        Clouds.clouds3();
+        normalBalloons.spawnBalloons1();
+        normalBalloons.spawnColourBalloons();
+        specialBalloons.sunBalloon();
+        specialBalloons.spiralBalloon();
+        specialBalloons.pointBalloon();
+        specialBalloons.starBalloon();
+
+        for(var z = 0; z < balloonsGroup1.length; z++){
+            if(mousePressedOver(balloonsGroup1[z])){
+                balloonsGroup1[z].destroy();
+                popSound.play();
+            }
+        }
+
+        for(var a = 0; a < balloonsColourGroup.length; a++){
+            if(mousePressedOver(balloonsColourGroup[a])){
+                balloonsColourGroup[a].destroy();
+                popSound.play();
+            }
+        }
+
+        for(var b = 0; b < sunBalloonGroup.length; b++){
+            if(mousePressedOver(sunBalloonGroup[b])){
+                sunBalloonGroup[b].destroy();
+            }
+        }
+        for(var c = 0; c < spiralBalloonGroup.length; c++){
+            if(mousePressedOver(spiralBalloonGroup[c])){
+                spiralBalloonGroup[c].destroy();
+            }
+        }
+        for(var d = 0; d < starBalloonGroup.length; d++){
+            if(mousePressedOver(starBalloonGroup[d])){
+                starBalloonGroup[d].destroy();
+            }
+        }
+        for(var e = 0; e < pointBalloonGroup.length; e++){
+            if(mousePressedOver(pointBalloonGroup[e])){
+                pointBalloonGroup[e].destroy();
+                dingSound.play();
+            }
+        }
     }     
 
     if(gameState === NUMBERS){        
         background(74, 189, 234);    
         backIcon3.visible = true;
-        clouds();
-        clouds1();
-        clouds2();
-        clouds3();
-        spawnBalloons1();
-        spawnNumberBalloons();
-        sunBalloon();
-        spiralBalloon();
-        pointBalloon();
-        starBalloon();
+        Clouds.clouds();
+        Clouds.clouds1();
+        Clouds.clouds2();
+        Clouds.clouds3();
+        normalBalloons.spawnBalloons1();
+        normalBalloons.spawnNumberBalloons();
+        specialBalloons.sunBalloon();
+        specialBalloons.spiralBalloon();
+        specialBalloons.pointBalloon();
+        specialBalloons.starBalloon();
+
+        for(var t = 0; t < balloonsGroup1.length; t++){
+            if(mousePressedOver(balloonsGroup1[t])){
+                balloonsGroup1[t].destroy();
+                popSound.play();
+            }
+        }
+
+        for(var u = 0; u < balloonsNumberGroup.length; u++){
+            if(mousePressedOver(balloonsNumberGroup[u])){
+                balloonsNumberGroup[u].destroy();
+                popSound.play();
+            }
+        }
+
+        for(var v = 0; v < sunBalloonGroup.length; v++){
+            if(mousePressedOver(sunBalloonGroup[v])){
+                sunBalloonGroup[v].destroy();
+            }
+        }
+        for(var w = 0; w < spiralBalloonGroup.length; w++){
+            if(mousePressedOver(spiralBalloonGroup[w])){
+                spiralBalloonGroup[w].destroy();
+            }
+        }
+        for(var x = 0; x < starBalloonGroup.length; x++){
+            if(mousePressedOver(starBalloonGroup[x])){
+                starBalloonGroup[x].destroy();
+            }
+        }
+        for(var y = 0; y < pointBalloonGroup.length; y++){
+            if(mousePressedOver(pointBalloonGroup[y])){
+                pointBalloonGroup[y].destroy();
+                dingSound.play();
+            }
+        }
     }        
 
     if(gameState === ALPHABET){        
         background(74, 189, 234);    
         backIcon2.visible = true;
-        clouds();
-        clouds1();
-        clouds2();
-        clouds3();
-        spawnBalloons1();
-        spawnAlphabetBalloons();
-        sunBalloon();
-        spiralBalloon();
-        pointBalloon();
-        starBalloon();
-        for(var i = 0; i < balloonsGroup1.length; i++){
-            if(mousePressedOver(balloonsGroup1[i])){
-                balloonsGroup1[i].destroy();
+        Clouds.clouds();
+        Clouds.clouds1();
+        Clouds.clouds2();
+        Clouds.clouds3();
+        normalBalloons.spawnBalloons1();
+        normalBalloons.spawnAlphabetBalloons();
+        specialBalloons.sunBalloon();
+        specialBalloons.spiralBalloon();
+        specialBalloons.pointBalloon();
+        specialBalloons.starBalloon();
+
+        for(var l = 0; l < balloonsGroup1.length; l++){
+            if(mousePressedOver(balloonsGroup1[l])){
+                balloonsGroup1[l].destroy();
                 popSound.play();
             }
         }
 
-        for(var i = 0; i < balloonsAlphabetGroup.length; i++){
-            if(mousePressedOver(balloonsAlphabetGroup[i])){
-                balloonsAlphabetGroup[i].destroy();
+        for(var o = 0; o < A.length; o++){
+            if(mousePressedOver(A[o])){
+                A[o].destroy();
                 popSound.play();
             }
         }
 
-        for(var j = 0; j < sunBalloonGroup.length; j++){
-            if(mousePressedOver(sunBalloonGroup[j])){
-                sunBalloonGroup[j].destroy();
+        for(var p = 0; p < sunBalloonGroup.length; p++){
+            if(mousePressedOver(sunBalloonGroup[p])){
+                sunBalloonGroup[p].destroy();
             }
         }
-        for(var k = 0; k < spiralBalloonGroup.length; k++){
-            if(mousePressedOver(spiralBalloonGroup[k])){
-                spiralBalloonGroup[k].destroy();
+        for(var q = 0; q < spiralBalloonGroup.length; q++){
+            if(mousePressedOver(spiralBalloonGroup[q])){
+                spiralBalloonGroup[q].destroy();
             }
         }
-        for(var m = 0; m < starBalloonGroup.length; m++){
-            if(mousePressedOver(starBalloonGroup[m])){
-                starBalloonGroup[m].destroy();
+        for(var r = 0; r < starBalloonGroup.length; r++){
+            if(mousePressedOver(starBalloonGroup[r])){
+                starBalloonGroup[r].destroy();
             }
         }
-        for(var n = 0; n < pointBalloonGroup.length; n++){
-            if(mousePressedOver(pointBalloonGroup[n])){
-                pointBalloonGroup[n].destroy();
+        for(var s = 0; s < pointBalloonGroup.length; s++){
+            if(mousePressedOver(pointBalloonGroup[s])){
+                pointBalloonGroup[s].destroy();
                 dingSound.play();
             }
         }
@@ -373,15 +475,15 @@ function draw(){
     if(gameState === BALLOONS){        
         background(74, 189, 234);    
         backIcon1.visible = true;
-        clouds();
-        clouds1();
-        clouds2();
-        clouds3();
-        spawnBalloons();
-        sunBalloon();
-        spiralBalloon();
-        pointBalloon();
-        starBalloon();
+        Clouds.clouds();
+        Clouds.clouds1();
+        Clouds.clouds2();
+        Clouds.clouds3();
+        normalBalloons.spawnBalloons();
+        specialBalloons.sunBalloon();
+        specialBalloons.spiralBalloon();
+        specialBalloons.pointBalloon();
+        specialBalloons.starBalloon();
         for(var i = 0; i < balloonsGroup.length; i++){
             if(mousePressedOver(balloonsGroup[i])){
                 balloonsGroup[i].destroy();
@@ -444,14 +546,14 @@ function draw(){
 
     //if mouse is over rules icon
     if(mouseIsOver(howToPlayIcon)){
-        howToPlayIcon.scale = 0.143;
+        howToPlayIcon.scale = 0.138;
     } else{
-        howToPlayIcon.scale = 0.14;
+        howToPlayIcon.scale = 0.13;
     }
 
     //if mouse is over music on icon
     if(mouseIsOver(music)){
-        music.scale = 0.73;
+        music.scale = 0.78;
     } else{
         music.scale = 0.7;
     }
@@ -493,9 +595,9 @@ function draw(){
 
     //if mouse is over close icon
     if(mouseIsOver(closeIcon)){
-        closeIcon.scale = 0.068;
+        closeIcon.scale = 0.128;
     } else{
-        closeIcon.scale = 0.06;
+        closeIcon.scale = 0.12;
     }
 
     //if mouse is over balloon cover
@@ -565,14 +667,18 @@ function draw(){
     }
 
     if(gameState === RULES && mouseIsOver(playIcon)){
-            playIcon.scale = 0.6;
+            playIcon.scale = 1;
     }
+
     if(gameState === RULES && mouseIsOver(music)){
-            music.scale = 0.4;
+        music.scale = 0.7;
     }
+
     if(gameState === RULES && mouseIsOver(howToPlayIcon)){
-        howToPlayIcon.scale = 0.08;
+        howToPlayIcon.scale = 0.13;
     }
+
+
 
     
     //mouse clicked music button
@@ -684,371 +790,4 @@ function draw(){
 
 
     drawSprites();
-}
-
-
-function clouds(){
-    if(frameCount % 250 === 0){
-        var cloud = createSprite(displayWidth + 70, 50, 40, 10);
-        cloud.addImage(cloudImage);
-        cloud.y = Math.round(random(0 + 30, displayHeight/2 + 30));
-        cloud.velocityX = -1.4;
-
-        //assigning scale & lifetime to clouds
-        cloud.scale = 0.95;
-        cloud.lifetime = 1000;
-
-        //add clouds to group
-        cloudGroup.add(cloud);
-}
-}
-
-function clouds1(){
-    if(frameCount % 250 === 0){
-        var cloud1 = createSprite(displayWidth + 220, 50, 40, 10);
-        cloud1.addImage(cloudImage1);
-        cloud1.y = Math.round(random(0 + 30, displayHeight/2 + 30));
-        cloud1.velocityX = -1.4;
-
-        //assigning scale & lifetime to clouds
-        cloud1.scale = 1.1;
-        cloud1.lifetime = 1000;
-
-        //add clouds to group
-        cloudGroup1.add(cloud1);
-}
-}
-
-function clouds2(){
-    if(frameCount % 250 === 0){
-        var cloud2 = createSprite(displayWidth + 380, 50, 40, 10);
-        cloud2.addImage(cloudImage2);
-        cloud2.y = Math.round(random(0 + 30, displayHeight/2 + 30));
-        cloud2.velocityX = -1.4;
-
-        //assigning scale & lifetime to clouds
-        cloud2.scale = 1.25;
-        cloud2.lifetime = 1000;
-
-        //add clouds to group
-        cloudGroup2.add(cloud2);
-}
-}
-
-function clouds3(){
-    if(frameCount % 250 === 0){
-        var cloud3 = createSprite(displayWidth + 530, 50, 40, 10);
-        cloud3.addImage(cloudImage3);
-        cloud3.y = Math.round(random(0 + 30, displayHeight/2 + 30));
-        cloud3.velocityX = -1.4;
-
-        //assigning scale & lifetime to clouds
-        cloud3.scale = 1.2;
-        cloud3.lifetime = 1000;
-
-        //add clouds to group
-        cloudGroup3.add(cloud3);
-}
-}
-
-function spawnBalloons(){
-        if(frameCount % 75 === 0){
-                var balloon = createSprite(600, displayHeight + 70, 10, 30);
-                balloon.x = Math.round(random(0 + 60, displayWidth - 30));
-                balloon.velocityY = Math.round(random(-2, -2.2));
-
-                var rand = Math.round(random(1, 13));
-                switch(rand){
-                    case 1: balloon.addImage(blueImg);
-                        break;
-                    case 2: balloon.addImage(cyanImg);
-                        break;
-                    case 3: balloon.addImage(dark_blueImg);
-                        break;
-                    case 4: balloon.addImage(dark_redImg);
-                        break;
-                    case 5: balloon.addImage(greenImg);
-                        break;
-                    case 6: balloon.addImage(orangeImg);
-                        break;
-                    case 7: balloon.addImage(pinkImg);
-                        break;
-                    case 8: balloon.addImage(purpleImg);
-                        break;
-                    case 9: balloon.addImage(redImg);
-                        break;
-                    case 10: balloon.addImage(sky_blueImg);
-                        break;
-                    case 11: balloon.addImage(turquoiseImg);
-                        break;
-                    case 12: balloon.addImage(violetImg);
-                        break;
-                    case 13: balloon.addImage(yellowImg);
-                        break;  
-                    default: break;
-                }
-
-                //assigning scale & lifetime
-                balloon.scale = 1.2;
-                balloon.lifetime = 450;
-
-                //add balloons to group
-                balloonsGroup.add(balloon);
-        }
-}
-
-function spawnBalloons1(){
-        if(frameCount % 150 === 0){
-                var balloon1 = createSprite(600, displayHeight + 50, 10, 30);
-                balloon1.x = Math.round(random(0 + 60, displayWidth - 30));
-                balloon1.velocityY = Math.round(random(-1.5, -1.8));
-
-                var rand = Math.round(random(1, 13));
-                switch(rand){
-                    case 1: balloon1.addImage(blueImg);
-                        break;
-                    case 2: balloon1.addImage(cyanImg);
-                        break;
-                    case 3: balloon1.addImage(dark_blueImg);
-                        break;
-                    case 4: balloon1.addImage(dark_redImg);
-                        break;
-                    case 5: balloon1.addImage(greenImg);
-                        break;
-                    case 6: balloon1.addImage(orangeImg);
-                        break;
-                    case 7: balloon1.addImage(pinkImg);
-                        break;
-                    case 8: balloon1.addImage(purpleImg);
-                        break;
-                    case 9: balloon1.addImage(redImg);
-                        break;
-                    case 10: balloon1.addImage(sky_blueImg);
-                        break;
-                    case 11: balloon1.addImage(turquoiseImg);
-                        break;
-                    case 12: balloon1.addImage(violetImg);
-                        break;
-                    case 13: balloon1.addImage(yellowImg);
-                        break;  
-                    default: break;
-                }
-
-                //assigning scale & lifetime
-                balloon1.scale = 1.2;
-                balloon1.lifetime = 450;
-
-                //add balloons to group
-                balloonsGroup1.add(balloon1);
-        }
-}
-
-function spawnAlphabetBalloons(){
-        if(frameCount % 120 === 0){
-                var balloonA = createSprite(600, displayHeight + 70, 10, 30);
-                balloonA.x = Math.round(random(0 + 60, displayWidth - 60));
-                balloonA.velocityY = Math.round(random(-1.8, -2));
-
-                var rand = Math.round(random(1, 26));
-                switch(rand){
-                    case 1: balloonA.addImage(A);
-                        break;
-                    case 2: balloonA.addImage(B);
-                        break;
-                    case 3: balloonA.addImage(C);
-                        break;
-                    case 4: balloonA.addImage(D);
-                        break;
-                    case 5: balloonA.addImage(E);
-                        break;
-                    case 6: balloonA.addImage(F);
-                        break;
-                    case 7: balloonA.addImage(G);
-                        break;
-                    case 8: balloonA.addImage(H);
-                        break;
-                    case 9: balloonA.addImage(I);
-                        break;
-                    case 10: balloonA.addImage(J);
-                        break;
-                    case 11: balloonA.addImage(K);
-                        break;
-                    case 12: balloonA.addImage(L);
-                        break;
-                    case 13: balloonA.addImage(M);
-                        break; 
-                    case 14: balloonA.addImage(N);
-                        break;
-                    case 15: balloonA.addImage(O);
-                        break;
-                    case 16: balloonA.addImage(P);
-                        break;
-                    case 17: balloonA.addImage(Q);
-                        break;
-                    case 18: balloonA.addImage(R);
-                        break;
-                    case 19: balloonA.addImage(S);
-                        break;
-                    case 20: balloonA.addImage(T);
-                        break;
-                    case 21: balloonA.addImage(U);
-                        break;
-                    case 22: balloonA.addImage(V);
-                        break;
-                    case 23: balloonA.addImage(W);
-                        break;
-                    case 24: balloonA.addImage(X);
-                        break;
-                    case 25: balloonA.addImage(Y);
-                        break;
-                    case 26: balloonA.addImage(Z);
-                        break;   
-                    default: break;
-                }
-
-                //assigning scale & lifetime
-                balloonA.scale = 1.35;
-                balloonA.lifetime = 450;
-
-                //add balloons to group
-                balloonsAlphabetGroup.add(balloonA);
-        }
-}
-
-function spawnNumberBalloons(){
-        if(frameCount % 100 === 0){
-                var balloonN = createSprite(600, displayHeight + 50, 10, 30);
-                balloonN.x = Math.round(random(0 + 60, displayWidth - 30));
-                balloonN.velocityY = Math.round(random(-1.5, -1.8));
-
-                var rand = Math.round(random(1, 10));
-                switch(rand){
-                    case 1: balloonN.addImage(balloon1);
-                        break;
-                    case 2: balloonN.addImage(balloon2);
-                        break;
-                    case 3: balloonN.addImage(balloon3);
-                        break;
-                    case 4: balloonN.addImage(balloon4);
-                        break;
-                    case 5: balloonN.addImage(balloon5);
-                        break;
-                    case 6: balloonN.addImage(balloon6);
-                        break;
-                    case 7: balloonN.addImage(balloon7);
-                        break;
-                    case 8: balloonN.addImage(balloon8);
-                        break;
-                    case 9: balloonN.addImage(balloon9);
-                        break;
-                    case 10: balloonN.addImage(balloon10);
-                        break;
-                    default: break;
-                }
-
-                //assigning scale & lifetime
-                balloonN.scale = 0.65;
-                balloonN.lifetime = 450;
-
-                //add balloons to group
-                balloonsNumberGroup.add(balloonN);
-        }
-}
-
-function spawnColourBalloons(){
-        if(frameCount % 100 === 0){
-                var balloonC = createSprite(600, displayHeight + 50, 10, 30);
-                balloonC.x = Math.round(random(0 + 60, displayWidth - 30));
-                balloonC.velocityY = Math.round(random(-1.5, -1.8));
-
-                var rand = Math.round(random(1, 7));
-                switch(rand){
-                    case 1: balloonC.addImage(blue);
-                        break;
-                    case 2: balloonC.addImage(green);
-                        break;
-                    case 3: balloonC.addImage(orange);
-                        break;
-                    case 4: balloonC.addImage(yellow);
-                        break;
-                    case 5: balloonC.addImage(pink);
-                        break;
-                    case 6: balloonC.addImage(purple);
-                        break;
-                    case 7: balloonC.addImage(red);
-                        break;
-                    default: break;
-                }
-
-                //assigning scale & lifetime
-                balloonC.scale = 0.65;
-                balloonC.lifetime = 450;
-
-                //add balloons to group
-                balloonsColourGroup.add(balloonC);
-        }
-}
-
-function sunBalloon(){
-        if(frameCount % 250 === 0){
-                var sunBalloon = createSprite(600, displayHeight + 70, 10, 30);
-                sunBalloon.velocityY = -1.4;
-                sunBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
-                sunBalloon.addImage(sunB);
-                sunBalloon.scale = 2.5;
-
-                //assigning lifetime
-                sunBalloon.lifetime = 450;
-
-                //add sun balloon to group
-                sunBalloonGroup.add(sunBalloon);
-        }
-}
-
-function spiralBalloon(){
-        if(frameCount % 250 === 0){
-                var spiralBalloon = createSprite(600, displayHeight + 270, 10, 30);
-                spiralBalloon.velocityY = -1.4;
-                spiralBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
-                spiralBalloon.addImage(spiralB);
-                spiralBalloon.scale = 2.5;
-
-                //assigning lifetime
-                spiralBalloon.lifetime = 520;
-
-                //add sun balloon to group
-                spiralBalloonGroup.add(spiralBalloon);
-        }
-}
-
-function pointBalloon(){
-        if(frameCount % 250 === 0){
-                var pointBalloon = createSprite(600, displayHeight + 470, 10, 30);
-                pointBalloon.velocityY = -1.4;
-                pointBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
-                pointBalloon.addImage(pointB);
-                pointBalloon.scale = 2.5;
-
-                //assigning lifetime
-                pointBalloon.lifetime = 600;
-
-                //add sun balloon to group
-                pointBalloonGroup.add(pointBalloon);
-        }
-}
-
-function starBalloon(){
-        if(frameCount % 250 === 0){
-                var starBalloon = createSprite(600, displayHeight + 560, 10, 30);
-                starBalloon.velocityY = -1.4;
-                starBalloon.x = Math.round(random(0 + 60, displayWidth - 30));
-                starBalloon.addImage(starB);
-                starBalloon.scale = 2.5;
-
-                //assigning lifetime
-                starBalloon.lifetime = 820;
-
-                //add sun balloon to group
-                starBalloonGroup.add(starBalloon);
-        }
 }
